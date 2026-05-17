@@ -1,0 +1,11 @@
+﻿# Ignore VCS and local artifacts
+.git
+.gitignore
+
+# Docs and build artifacts are not needed in image
+/docs
+/build
+
+# OS/editor files
+.DS_Store
+Thumbs.db

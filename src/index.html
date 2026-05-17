@@ -1,0 +1,137 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 2 - Web Text Editor</title>
+  <link rel="stylesheet" href="../resources/styles/main.css" />
+</head>
+<body class="theme-light">
+  <div class="app-shell">
+    <header class="top-panel">
+      <nav class="menu-bar" role="menubar" aria-label="Главное меню">
+        <details class="menu">
+          <summary>Файл</summary>
+          <div class="menu-items" role="menu">
+            <button type="button" data-action="new">Новый</button>
+            <button type="button" data-action="open">Открыть...</button>
+            <button type="button" data-action="save">Сохранить</button>
+            <button type="button" data-action="save-as">Сохранить как...</button>
+            <button type="button" data-action="print">Печать / PDF...</button>
+          </div>
+        </details>
+        <details class="menu">
+          <summary>Правка</summary>
+          <div class="menu-items" role="menu">
+            <button type="button" data-action="undo">Отменить</button>
+            <button type="button" data-action="find">Найти...</button>
+            <button type="button" data-action="copy">Копировать</button>
+            <button type="button" data-action="cut">Вырезать</button>
+            <button type="button" data-action="paste">Вставить</button>
+          </div>
+        </details>
+        <details class="menu">
+          <summary>Справка</summary>
+          <div class="menu-items" role="menu">
+            <button type="button" data-action="hotkeys">Горячие клавиши</button>
+            <button type="button" data-action="about">О программе</button>
+          </div>
+        </details>
+      </nav>
+
+      <section class="toolbar" aria-label="Панель инструментов">
+        <button type="button" class="tool-btn" data-action="new">Новый</button>
+        <button type="button" class="tool-btn" data-action="open">Открыть</button>
+        <button type="button" class="tool-btn" data-action="save">Сохранить</button>
+        <button type="button" class="tool-btn" data-action="copy">Копировать</button>
+        <button type="button" class="tool-btn" data-action="paste">Вставить</button>
+        <button type="button" class="tool-btn" data-action="cut">Вырезать</button>
+
+        <div class="toolbar-separator" aria-hidden="true"></div>
+
+        <label class="field-inline">
+          Шрифт
+          <select id="font-family-select" aria-label="Выбор шрифта">
+            <option value="Segoe UI">Segoe UI</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Consolas">Consolas</option>
+            <option value="Georgia">Georgia</option>
+          </select>
+        </label>
+
+        <label class="field-inline">
+          Размер
+          <input id="font-size-input" type="number" min="10" max="40" step="1" value="16" aria-label="Размер шрифта" />
+        </label>
+
+        <label class="toggle-inline">
+          <input id="theme-toggle" type="checkbox" />
+          Тёмная тема
+        </label>
+
+        <label class="toggle-inline">
+          <input id="preview-toggle" type="checkbox" checked />
+          Markdown-preview
+        </label>
+
+        <label class="toggle-inline">
+          <input id="autosave-toggle" type="checkbox" checked />
+          Автосохранение
+        </label>
+      </section>
+
+      <section id="search-panel" class="search-panel hidden" aria-label="Поиск по тексту">
+        <input id="find-input" type="text" placeholder="Введите текст для поиска" />
+        <button type="button" data-action="find-next">След.</button>
+        <button type="button" data-action="find-prev">Пред.</button>
+        <button type="button" data-action="find-close">Закрыть</button>
+        <span id="find-result" class="find-result">Совпадений: 0</span>
+      </section>
+    </header>
+
+    <main class="workspace">
+      <section class="editor-column" aria-label="Область редактирования">
+        <textarea id="editor" spellcheck="false" placeholder="Введите текст здесь..."></textarea>
+      </section>
+      <aside id="preview-pane" class="preview-column" aria-label="Панель предпросмотра Markdown">
+        <h2>Markdown preview</h2>
+        <div id="preview-content" class="preview-content"></div>
+      </aside>
+    </main>
+
+    <footer class="status-bar" aria-live="polite">
+      <span id="status-file">Файл: Безымянный.txt</span>
+      <span id="status-counts">Слова: 0 | Символы: 0 | Строки: 1</span>
+      <span id="status-autosave">Автосохранение: вкл</span>
+      <span id="status-time">Время: --:--:--</span>
+    </footer>
+  </div>
+
+  <dialog id="about-dialog">
+    <h3>О программе</h3>
+    <p>Web Text Editor (Task 2) - учебный текстовый редактор с поддержкой .txt/.rtf, поиском, автосохранением и Markdown-preview.</p>
+    <button type="button" data-action="close-about">Закрыть</button>
+  </dialog>
+
+  <dialog id="hotkeys-dialog">
+    <h3>Горячие клавиши</h3>
+    <ul>
+      <li>Ctrl+N - Новый</li>
+      <li>Ctrl+O - Открыть</li>
+      <li>Ctrl+S - Сохранить</li>
+      <li>Ctrl+Shift+S - Сохранить как</li>
+      <li>Ctrl+P - Печать / экспорт в PDF</li>
+      <li>Ctrl+F - Найти</li>
+      <li>Ctrl+Z - Отменить</li>
+      <li>Ctrl+C / Ctrl+X / Ctrl+V - Копировать / Вырезать / Вставить</li>
+    </ul>
+    <button type="button" data-action="close-hotkeys">Закрыть</button>
+  </dialog>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <input id="file-input" type="file" accept=".txt,.rtf,text/plain,text/rtf,application/rtf" class="hidden" />
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

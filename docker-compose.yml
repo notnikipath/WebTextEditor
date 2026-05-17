@@ -1,0 +1,9 @@
+﻿services:
+  text-editor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: task2-text-editor
+    ports:
+      - "32017:80"
+    restart: unless-stopped
