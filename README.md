@@ -1,4 +1,4 @@
-﻿# Task_2 - Web Text Editor
+﻿# Web Text Editor
 
 Учебный проект простого текстового редактора в веб-формате с запуском в Docker.
 
@@ -25,7 +25,7 @@
 ## Структура проекта
 
 ```text
-Task_2/
+Web_Text_Editor/
 ├── src/
 │   ├── index.html
 │   ├── main.js
