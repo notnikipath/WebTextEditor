@@ -320,3 +320,26 @@ dialog::backdrop {
     max-height: 260px;
   }
 }
+
+/* UI/UX Pro Max — calm writing surface and clear editor chrome. */
+:root { --bg:#f3f5f3; --panel:#ffffff; --panel-2:#edf3ef; --text:#182b26; --muted:#4c635b; --border:#cddbd4; --accent:#0f766e; --accent-hover:#115e59; --shadow:0 2px 8px rgb(20 40 30 / 5%); }
+body { background:var(--bg); font-size:16px; }
+.editor-brand { display:flex; gap:12px; align-items:center; padding:18px 24px; border-bottom:1px solid var(--border); }
+.editor-brand h1 { font-size:19px; letter-spacing:-.03em; margin:0; }
+.editor-brand p { color:var(--muted); font-size:13px; margin:0; }
+.editor-brand svg { color:var(--accent); width:32px; height:32px; }
+.menu-bar { padding:8px 16px; }
+.toolbar { gap:12px; padding:12px 16px; }
+.tool-btn { min-height:44px; border-radius:8px; }
+.tool-btn[data-action=save] { color:#fff; background:var(--accent); border-color:var(--accent); }
+input,select,button { font:inherit; }
+input:not([type=checkbox]),select { min-height:40px; }
+.workspace { gap:20px; padding:24px; background:var(--bg); }
+.editor-column,.preview-column { background:var(--panel); border:1px solid var(--border); border-radius:10px; box-shadow:var(--shadow); min-width:0; }
+#editor { padding:28px; line-height:1.75; color:var(--text); background:var(--panel); }
+.preview-column { padding:24px; }
+.preview-column h2 { color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.08em; }
+.status-bar { gap:12px; flex-wrap:wrap; padding:12px 24px; color:var(--muted); background:var(--panel); }
+:is(button,input,select,summary,textarea):focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+@media(max-width:768px) { .workspace { padding:12px; gap:12px; } #editor { padding:18px; } .toolbar { flex-wrap:wrap; } .editor-brand { padding:16px; } }
+@media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; } }

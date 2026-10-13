@@ -9,6 +9,7 @@
 <body class="theme-light">
   <div class="app-shell">
     <header class="top-panel">
+      <div class="editor-brand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M7 3h8l4 4v14H5V3h2zM14 3v5h5M8 12h8M8 16h6"/></svg><div><h1>Web Text Editor</h1><p>Пространство для ваших текстов</p></div></div>
       <nav class="menu-bar" role="menubar" aria-label="Главное меню">
         <details class="menu">
           <summary>Файл</summary>
@@ -81,7 +82,7 @@
       </section>
 
       <section id="search-panel" class="search-panel hidden" aria-label="Поиск по тексту">
-        <input id="find-input" type="text" placeholder="Введите текст для поиска" />
+        <input id="find-input" aria-label="Найти в документе" type="text" placeholder="Введите текст для поиска" />
         <button type="button" data-action="find-next">След.</button>
         <button type="button" data-action="find-prev">Пред.</button>
         <button type="button" data-action="find-close">Закрыть</button>
@@ -91,7 +92,7 @@
 
     <main class="workspace">
       <section class="editor-column" aria-label="Область редактирования">
-        <textarea id="editor" spellcheck="false" placeholder="Введите текст здесь..."></textarea>
+        <textarea id="editor" aria-label="Текст документа" spellcheck="false" placeholder="Введите текст здесь..."></textarea>
       </section>
       <aside id="preview-pane" class="preview-column" aria-label="Панель предпросмотра Markdown">
         <h2>Markdown preview</h2>
